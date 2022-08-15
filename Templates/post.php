@@ -6,12 +6,12 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="post-heading">
-                    <h1><?= htmlspecialchars($post['title']) ?></h1>
+                    <h1><?= htmlspecialchars($post->title) ?></h1>
                     <!-- <h2 class="subheading">Problems look mighty small from 150 miles up</h2> -->
                     <span class="meta">
                         Posted by
                         <a href="#!">Start Bootstrap</a>
-                        <em>le <?= $post['french_creation_date'] ?></em>
+                        <em>le <?= $post->frenchCreationDate ?></em>
                     </span>
                 </div>
             </div>
@@ -28,18 +28,18 @@
 
             <div>
                 <!-- <h3>
-                    <?= htmlspecialchars($post['title']) ?>
-                    <em>le <?= $post['french_creation_date'] ?></em>
+                    <?= htmlspecialchars($post->title) ?>
+                    <em>le <?= $post->frenchCreationDate ?></em>
                 </h3> -->
 
                 <p>
-                    <?= nl2br(htmlspecialchars($post['content'])) ?>
+                    <?= nl2br(htmlspecialchars($post->content)) ?>
                 </p>
             </div>
 
             <h2>Commentaires</h2>
 
-            <form action="index.php?action=addComment&id=<?= $post['identifier'] ?>" method="post">
+            <form action="index.php?action=addComment&id=<?= $post->identifier ?>" method="post">
                 <div>
                     <label for="author">Auteur</label><br />
                     <input type="text" id="author" name="author" />
@@ -56,8 +56,8 @@
             <?php
             foreach ($comments as $comment) {
             ?>
-                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['french_creation_date'] ?></p>
-                <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                <p><strong><?= htmlspecialchars($comment->author) ?></strong> le <?= $comment->frenchCreationDate ?></p>
+                <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
 
             <?php
             }

@@ -30,14 +30,14 @@
             ?>
                 <!-- Post preview-->
                 <div class="post-preview">
-                    <a href="index.php?action=post&id=<?= urlencode($post['id']) ?>">
-                        <h2 class="post-title"><?= htmlspecialchars($post['title']); ?></h2>
-                        <h3 class="post-subtitle"><?= nl2br(htmlspecialchars($post['content'])); ?></h3>
+                    <a href="index.php?action=post&id=<?= urlencode($post->identifier) ?>">
+                        <h2 class="post-title"><?= htmlspecialchars($post->title); ?></h2>
+                        <h3 class="post-subtitle"><?= nl2br(htmlspecialchars($post->content)); ?></h3>
                     </a>
                     <p class="post-meta">
                         Posté par
                         <a href="#!">Start Bootstrap</a>
-                        le <?= $post['french_creation_date']; ?>
+                        le <?= $post->frenchCreationDate; ?>
                     </p>
                 </div>
                 <!-- Divider-->

@@ -1,6 +1,13 @@
 <?php
 
-function getComments(string $post)
+class Comment
+{
+    public string $author;
+    public string $frenchCreationDate;
+    public string $comment;
+}
+
+function getComments(string $post): array
 {
     $database = commentDbConnect();
     $statement = $database->prepare(
@@ -10,11 +17,10 @@ function getComments(string $post)
 
     $comments = [];
     while (($row = $statement->fetch())) {
-        $comment = [
-            'author' => $row['author'],
-            'french_creation_date' => $row['french_creation_date'],
-            'comment' => $row['comment'],
-        ];
+        $comment = new Comment();
+        $comment->author = $row['author'];
+        $comment->frenchCreationDate = $row['french_creation_date'];
+        $comment->comment = $row['comment'];
 
         $comments[] = $comment;
     }
@@ -22,7 +28,7 @@ function getComments(string $post)
     return $comments;
 }
 
-function createComment(string $post, string $author, string $comment): bool
+function createComment(string $post, string $author, string $comment)
 {
     $database = commentDbConnect();
     $statement = $database->prepare(
@@ -35,11 +41,7 @@ function createComment(string $post, string $author, string $comment): bool
 
 function commentDbConnect()
 {
-    try {
-        $database = new PDO('mysql:host=localhost;dbname=vinc_blog;charset=utf8', 'root', '');
+    $database = new PDO('mysql:host=localhost;dbname=vinc_blog;charset=utf8', 'root', '');
 
-        return $database;
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
+    return $database;
 }

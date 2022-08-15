@@ -1,6 +1,14 @@
 <?php
 
-function getPosts()
+class Post
+{
+    public string $title;
+    public string $frenchCreationDate;
+    public string $content;
+    public string $identifier;
+}
+
+function getPosts(): array
 {
     $database = dbConnect();
     $statement = $database->query(
@@ -8,12 +16,11 @@ function getPosts()
     );
     $posts = [];
     while (($row = $statement->fetch())) {
-        $post = [
-            'title' => $row['title'],
-            'french_creation_date' => $row['french_creation_date'],
-            'content' => $row['content'],
-            'id' => $row['id'],
-        ];
+        $post = new Post();
+        $post->title = $row['title'];
+        $post->frenchCreationDate = $row['french_creation_date'];
+        $post->content = $row['content'];
+        $post->identifier = $row['id'];
 
         $posts[] = $post;
     }
@@ -21,21 +28,20 @@ function getPosts()
     return $posts;
 }
 
-function getPost($id)
+function getPost(string $identifier): Post
 {
     $database = dbConnect();
     $statement = $database->prepare(
         "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts WHERE id = ?"
     );
-    $statement->execute([$id]);
+    $statement->execute([$identifier]);
 
     $row = $statement->fetch();
-    $post = [
-        'title' => $row['title'],
-        'french_creation_date' => $row['french_creation_date'],
-        'content' => $row['content'],
-        'identifier' => $row['id'],
-    ];
+    $post = new Post();
+    $post->title = $row['title'];
+    $post->frenchCreationDate = $row['french_creation_date'];
+    $post->content = $row['content'];
+    $post->identifier = $row['id'];
 
     return $post;
 }
