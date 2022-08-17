@@ -7,13 +7,17 @@ require_once('src/Controllers/about.php');
 require_once('src/Controllers/post.php');
 require_once('src/Controllers/homepage.php');
 
+use Application\Controllers\AddComment\AddCommentController;
+use Application\Controllers\HomePage\HomepageController;
+use Application\Controllers\Post\PostController;
+
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $identifier = $_GET['id'];
 
-                post($identifier);
+                (new PostController())->execute($identifier);
             } else {
                 throw new Exception('Aucun identifiant de post envoyé');
             }
@@ -21,7 +25,7 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 $identifier = $_GET['id'];
 
-                addComment($identifier, $_POST);
+                (new AddCommentController())->execute($identifier, $_POST);
             } else {
                 throw new Exception('Aucun identifiant de post envoyé');
             }
@@ -33,7 +37,7 @@ try {
     } elseif ($_GET['page'] === "contact") {
         contact();
     } else {
-        homepage();
+        (new HomepageController())->execute();
     }
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();

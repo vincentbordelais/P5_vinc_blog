@@ -1,6 +1,10 @@
 <?php
 
+namespace Application\Model\Post;
+
 require_once('src/Lib/database.php');
+
+use Application\Lib\Database\DatabaseConnection;
 
 class Post
 {
