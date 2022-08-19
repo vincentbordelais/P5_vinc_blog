@@ -15,17 +15,17 @@ try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $identifier = $_GET['id'];
+                $id = $_GET['id'];
 
-                (new PostController())->execute($identifier);
+                (new PostController())->execute($id);
             } else {
                 throw new Exception('Aucun identifiant de post envoyé');
             }
         } elseif ($_GET['action'] === 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $identifier = $_GET['id'];
+                $id = $_GET['id'];
 
-                (new AddCommentController())->execute($identifier, $_POST);
+                (new AddCommentController())->execute($id, $_POST);
             } else {
                 throw new Exception('Aucun identifiant de post envoyé');
             }

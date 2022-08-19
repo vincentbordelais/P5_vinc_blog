@@ -12,15 +12,15 @@ use Application\Lib\Database\DatabaseConnection;
 
 class PostController
 {
-    function execute(string $identifier)
+    function execute(string $post_id)
     {
         $postRepository = new PostRepository;
         $postRepository->connection = new DatabaseConnection();
-        $post = $postRepository->getPost($identifier);
-        // $post = getPost($identifier);
+        $post = $postRepository->getPost($post_id);
+        // $post = getPost($post_id);
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();;
-        $comments = $commentRepository->getComments($identifier);
+        $comments = $commentRepository->getComments($post_id);
 
         require('Templates/post.php');
     }
