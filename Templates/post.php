@@ -6,10 +6,10 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="post-heading">
-                    <h1><?= htmlspecialchars($post->title) ?></h1>
-                    <h2 class="subheading"><?= htmlspecialchars($post->wording) ?></h2>
+                    <h1><?= htmlspecialchars($post->getTitle()) ?></h1>
+                    <h2 class="subheading"><?= htmlspecialchars($post->getWording()) ?></h2>
                     <span class="meta">
-                        Posté par Vinc <em>le <?= $post->frenchCreationDate ?></em>
+                        Posté par Vinc <em>le <?= $post->getCreationDate() ?></em>
                     </span>
                 </div>
             </div>
@@ -26,18 +26,18 @@
 
             <div>
                 <!-- <h3>
-                    <?= htmlspecialchars($post->title) ?>
-                    <em>le <?= $post->frenchCreationDate ?></em>
+                    <?= htmlspecialchars($post->getTitle()) ?>
+                    <em>le <?= $post->getCreationDate() ?></em>
                 </h3> -->
 
                 <p>
-                    <?= nl2br(htmlspecialchars($post->content)) ?>
+                    <?= nl2br(htmlspecialchars($post->getContent())) ?>
                 </p>
             </div>
 
             <h2>Commentaires</h2>
 
-            <form action="index.php?action=addComment&id=<?= $post->id ?>" method="post">
+            <form action="index.php?action=addComment&id=<?= $post->getId() ?>" method="post">
                 <div>
                     <label for="author">Votre pseudonyme</label><br />
                     <input type="text" id="author" name="author" />
@@ -54,8 +54,8 @@
             <?php
             foreach ($comments as $comment) {
             ?>
-                <p><strong><?= htmlspecialchars($comment->user_id) ?></strong> le <?= $comment->frenchCreationDate ?></p>
-                <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
+                <p><strong><?= htmlspecialchars($comment->getUser_id()) ?></strong> le <?= $comment->getCreationDate() ?></p>
+                <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
 
             <?php
             }

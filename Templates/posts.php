@@ -30,12 +30,12 @@
             ?>
                 <!-- Post preview-->
                 <div class="post-preview">
-                    <a href="index.php?page=post&action=post&id=<?= urlencode($post->id) ?>">
-                        <h2 class="post-title"><?= htmlspecialchars($post->title); ?></h2>
-                        <h3 class="post-subtitle"><?= nl2br(htmlspecialchars($post->content)); ?></h3>
+                    <a href="index.php?page=post&action=post&id=<?= urlencode($post->getId()) ?>">
+                        <h2 class="post-title"><?= htmlspecialchars($post->getTitle()); ?></h2>
+                        <h3 class="post-subtitle"><?= nl2br(htmlspecialchars($post->getWording())); ?></h3>
                     </a>
                     <p class="post-meta">
-                        Posté par Vinc le <?= $post->frenchCreationDate; ?>
+                        Posté par Vinc le <?= $post->getCreationDate(); ?>
                     </p>
                 </div>
                 <!-- Divider-->

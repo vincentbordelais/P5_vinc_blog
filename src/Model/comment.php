@@ -2,17 +2,96 @@
 
 namespace Application\Model\Comment;
 
-// require_once('src/Model/user.php');
 require_once('src/Lib/database.php');
 
-// use Application\Model\User\UserRepository;
 use Application\Lib\Database\DatabaseConnection;
 
 class Comment
 {
-    public string $user_id;
-    public string $frenchCreationDate;
-    public string $comment;
+    private string $post_id;
+    private string $user_id;
+    private string $comment;
+    private string $creationDate;
+
+    /**
+     * Get the value of post_id
+     */
+    public function getPost_id()
+    {
+        return $this->post_id;
+    }
+
+    /**
+     * Set the value of post_id
+     *
+     * @return  self
+     */
+    public function setPost_id($post_id)
+    {
+        $this->post_id = $post_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of user_id
+     */
+    public function getUser_id()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * Set the value of user_id
+     *
+     * @return  self
+     */
+    public function setUser_id($user_id)
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set the value of comment
+     *
+     * @return  self
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of creationDate
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * Set the value of creationDate
+     *
+     * @return  self
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
 }
 
 class CommentRepository
@@ -29,9 +108,9 @@ class CommentRepository
         $comments = [];
         while (($row = $statement->fetch())) {
             $comment = new Comment();
-            $comment->user_id = $row['user_id'];
-            $comment->frenchCreationDate = $row['french_creation_date'];
-            $comment->comment = $row['comment'];
+            $comment->setUser_id($row['user_id']);
+            $comment->setComment($row['comment']);
+            $comment->setCreationDate($row['french_creation_date']);
 
             $comments[] = $comment;
         }
