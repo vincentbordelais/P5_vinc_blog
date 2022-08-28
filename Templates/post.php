@@ -37,10 +37,10 @@
 
             <h2>Commentaires</h2>
 
-            <form action="index.php?action=addComment&id=<?= $post->getId() ?>" method="post">
+            <form action="index.php?page=post&action=addComment&id=<?= $post->getId() ?>" method="post">
                 <div>
                     <label for="author">Votre pseudonyme</label><br />
-                    <input type="text" id="author" name="author" />
+                    <input type="number" id="author" name="author" />
                 </div>
                 <div>
                     <label for="comment">Commentaire</label><br />

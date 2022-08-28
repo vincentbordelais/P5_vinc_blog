@@ -140,13 +140,31 @@ class UserRepository
 {
     public DatabaseConnection $connection;
 
-    public function getUsername(string $id)
+    // public function getUsernameFromUserId(string $id)
+    // {
+    //     $statement = $this->connection->getConnection()->prepare(
+    //         "SELECT username FROM users WHERE id = " . $id);
+    //     $statement->execute();
+    //     return $statement->fetchAll();
+    // }
+
+    public function getUsernameFromUserId(string $id)
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username FROM users WHERE id = ?"
+            "SELECT username FROM users WHERE id = ?"
         );
         $statement->execute([$id]);
 
         return $statement->fetch();
     }
+
+    // public function getUserId(string $username)
+    // {
+    //     $statement = $this->connection->getConnection()->prepare(
+    //         "SELECT id FROM users WHERE username = ?"
+    //     );
+    //     $statement->execute([$username]);
+
+    //     return $statement->fetch();
+    // }
 }

@@ -118,13 +118,63 @@ class CommentRepository
         return $comments;
     }
 
-    public function createComment(string $post_id, string $username, string $comment)
+    public function getUsernameFromUserId(string $id)
     {
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO comments(post_id, username, comment, update_date,creation_date) VALUES(?, ?, ?, NOW(), NOW())'
+            "SELECT username FROM users WHERE id = ?"
         );
-        $affectedLines = $statement->execute([$post_id, $username, $comment]);
+        $statement->execute([$id]);
+
+        return $statement->fetch();
+    }
+
+    // public function createComment(string $post_id, string $username, string $comment)
+    // {
+    //     $statement = $this->connection->getConnection()->prepare(
+    //         'INSERT INTO comments(post_id, username, comment, update_date,creation_date) VALUES(?, ?, ?, NOW(), NOW())'
+    //     );
+    //     $affectedLines = $statement->execute([$post_id, $username, $comment]);
+
+    //     return ($affectedLines > 0);
+    // }
+
+    public function createComment(string $post_id, string $user_id, string $comment): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'INSERT INTO comments(post_id, user_id, comment, creation_date) VALUES(?, ?, ?, NOW())'
+        );
+        $affectedLines = $statement->execute([$post_id, $user_id, $comment]);
 
         return ($affectedLines > 0);
     }
+
+    // public function getUsername(string $user_id)
+    // {
+    //     $statement = $this->connection->getConnection()->prepare(
+    //         "SELECT id, username FROM users WHERE id = ?"
+    //     );
+    //     $statement->execute([$user_id]);
+
+    //     return $statement->fetch();
+    // }
+
+    // public function getUsername(string $user_id): array
+    // {
+    //     $statement = $this->connection->getConnection()->prepare(
+    //         "SELECT username FROM users WHERE users.id = comments.user_id"
+    //     );
+    //     $statement->execute([$user_id]);
+
+    //     $userName = $statement->fetch();
+
+    //     return $userName;
+    // }
+
+    // public function getOwner(): array
+    // {
+    //   $req = $this->dbh->prepare("SELECT u.username, u.bio FROM user as u, post as p WHERE u.id = p.userID and p.id = :id");
+    //   $req->bindParam(':id', $this->id);
+    //   $req->execute();
+    //   return $req->fetch(\PDO::FETCH_ASSOC);
+    // }
 }
