@@ -36,7 +36,7 @@
             </div>
 
             <h2>Commentaires</h2>
-
+            <!-- Formulaire commentaire pour les utilisateurs connectés -->
             <form action="index.php?action=addComment&id=<?= $post->getId() ?>" method="post">
                 <div>
                     <label for="author">Votre pseudonyme</label><br />
@@ -54,13 +54,11 @@
             <?php
             foreach ($comments as $comment) {
             ?>
-                <p><strong><?= htmlspecialchars($comment->getUser_id()) ?></strong> le <?= $comment->getCreationDate() ?></p>
+                <p><strong><?= htmlspecialchars($comment->getUsername()) ?></strong> le <?= $comment->getCreation_date() ?></p>
                 <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
-
             <?php
             }
             ?>
-
         </div>
     </div>
 </div>

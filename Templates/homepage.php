@@ -70,7 +70,7 @@
                         <input class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
                         <label for="email">Email</label>
                         <div class="invalid-feedback" data-sb-feedback="email:required">Un email est requis.</div>
-                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">Email non valide.</div>
                     </div>
                     <div class="form-floating">
                         <input class="form-control" id="phone" type="tel" placeholder="Enter your phone number..." data-sb-validations="required" />
@@ -89,7 +89,7 @@
                     <!-- has successfully submitted-->
                     <div class="d-none" id="submitSuccessMessage">
                         <div class="text-center mb-3">
-                            <div class="fw-bolder">Form submission successful!</div>
+                            <div class="fw-bolder">Envoi du formulaire réussi!</div>
                             To activate this form, sign up at
                             <br />
                             <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>

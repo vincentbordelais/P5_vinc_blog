@@ -6,12 +6,13 @@ require_once('src/Lib/database.php');
 
 use Application\Lib\Database\DatabaseConnection;
 
-class Comment
+class Comment extends CommentRepository
 {
     private string $post_id;
     private string $user_id;
     private string $comment;
-    private string $creationDate;
+    private string $creation_date;
+    private string $username;
 
     /**
      * Get the value of post_id
@@ -74,21 +75,41 @@ class Comment
     }
 
     /**
-     * Get the value of creationDate
+     * Get the value of creation_date
      */
-    public function getCreationDate()
+    public function getCreation_date()
     {
-        return $this->creationDate;
+        return $this->creation_date;
     }
 
     /**
-     * Set the value of creationDate
+     * Set the value of creation_date
      *
      * @return  self
      */
-    public function setCreationDate($creationDate)
+    public function setCreation_date($creation_date)
     {
-        $this->creationDate = $creationDate;
+        $this->creation_date = $creation_date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of username
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set the value of username
+     *
+     * @return  self
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
 
         return $this;
     }
@@ -100,17 +121,20 @@ class CommentRepository
 
     public function getComments(string $post_id): array
     {
+
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, user_id, comment, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY creation_date DESC"
+            "SELECT users.username, user_id, comment, DATE_FORMAT(comments.creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM users INNER JOIN comments ON users.id = comments.user_id WHERE post_id = ? ORDER BY creation_date DESC"
         );
+
         $statement->execute([$post_id]);
 
         $comments = [];
         while (($row = $statement->fetch())) {
             $comment = new Comment();
+            $comment->setUsername($row['username']);
             $comment->setUser_id($row['user_id']);
             $comment->setComment($row['comment']);
-            $comment->setCreationDate($row['french_creation_date']);
+            $comment->setCreation_date($row['french_creation_date']);
 
             $comments[] = $comment;
         }

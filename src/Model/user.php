@@ -4,16 +4,35 @@ namespace Application\Model\User;
 
 require_once('src/Lib/database.php');
 
-use Application\Lib\Database\DatabaseConnection;
-
 class User
 {
+    private string $id;
     private string $username;
     private string $lastname;
     private string $firstname;
     private string $email;
-    private string $creationDate;
+    private string $created_date;
     private string $role;
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get the value of username
@@ -96,21 +115,21 @@ class User
     }
 
     /**
-     * Get the value of creationDate
+     * Get the value of created_date
      */
-    public function getCreationDate()
+    public function getCreated_date()
     {
-        return $this->creationDate;
+        return $this->created_date;
     }
 
     /**
-     * Set the value of creationDate
+     * Set the value of created_date
      *
      * @return  self
      */
-    public function setCreationDate($creationDate)
+    public function setCreated_date($created_date)
     {
-        $this->creationDate = $creationDate;
+        $this->created_date = $created_date;
 
         return $this;
     }
@@ -133,20 +152,5 @@ class User
         $this->role = $role;
 
         return $this;
-    }
-}
-
-class UserRepository
-{
-    public DatabaseConnection $connection;
-
-    public function getUsername(string $id)
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username FROM users WHERE id = ?"
-        );
-        $statement->execute([$id]);
-
-        return $statement->fetch();
     }
 }

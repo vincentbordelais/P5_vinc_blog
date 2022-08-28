@@ -19,7 +19,7 @@ class PostController
         $post = $postRepository->getPost($post_id);
         // $post = getPost($post_id);
         $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();;
+        $commentRepository->connection = new DatabaseConnection();
         $comments = $commentRepository->getComments($post_id);
 
         require('Templates/post.php');
