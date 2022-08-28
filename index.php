@@ -20,16 +20,16 @@ try {
         if (isset($_GET['action']) && $_GET['action'] !== '') {
             if ($_GET['action'] === 'post') {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $id = $_GET['id'];
+                    $post_id = $_GET['id'];
                     // page Article
-                    (new PostController())->execute($id);
+                    (new PostController())->execute($post_id);
                 } else {
                     throw new Exception('Aucun identifiant de post envoyé');
                 }
             } elseif ($_GET['action'] === 'addComment') {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $id = $_GET['id'];
-                    (new AddCommentController())->execute($id, $_POST);
+                    $post_id = $_GET['id'];
+                    (new AddCommentController())->execute($post_id, $_POST);
                 } else {
                     throw new Exception('Aucun identifiant de post envoyé');
                 }

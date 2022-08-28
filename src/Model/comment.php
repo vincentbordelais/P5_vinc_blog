@@ -145,7 +145,7 @@ class CommentRepository
     public function createComment(string $post_id, string $username, string $comment)
     {
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO comments(post_id, username, comment, update_date,creation_date) VALUES(?, ?, ?, NOW(), NOW())'
+            'INSERT INTO comments(post_id, user_id, comment, creation_date) VALUES(?, ?, ?, NOW())'
         );
         $affectedLines = $statement->execute([$post_id, $username, $comment]);
 

@@ -36,11 +36,11 @@
             </div>
 
             <h2>Commentaires</h2>
-            <!-- Formulaire commentaire pour les utilisateurs connectés -->
-            <form action="index.php?action=addComment&id=<?= $post->getId() ?>" method="post">
+            <!-- Formulaire commentaire pour les utilisateurs connectés (ou pas?) -->
+            <form action="index.php?page=post&action=addComment&id=<?= $post->getId() ?>" method="post">
                 <div>
                     <label for="author">Votre pseudonyme</label><br />
-                    <input type="text" id="author" name="author" />
+                    <input type="text" id="author" name="username" />
                 </div>
                 <div>
                     <label for="comment">Commentaire</label><br />
