@@ -1,6 +1,8 @@
 <?php
 // ROUTEUR :
 
+require_once('src/Controllers/registration.php');
+require_once('src/Controllers/connection.php');
 require_once('src/Controllers/posts.php');
 require_once('src/Controllers/add_comment.php');
 require_once('src/Controllers/contact.php');
@@ -37,6 +39,12 @@ try {
                 throw new Exception('La page souhaitée n\'existe pas.');
             }
         }
+    } elseif ($_GET['page'] === "registration") {
+        // page Inscription
+        registration();
+    } elseif ($_GET['page'] === "connection") {
+        // page Connexion
+        connection();
     } elseif ($_GET['page'] === "about") {
         // page A propos
         about();
