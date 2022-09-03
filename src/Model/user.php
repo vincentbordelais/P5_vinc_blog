@@ -4,6 +4,8 @@ namespace Application\Model\User;
 
 require_once('src/Lib/database.php');
 
+use Application\Lib\Database\DatabaseConnection;
+
 class User
 {
     private string $id;
@@ -11,6 +13,7 @@ class User
     private string $lastname;
     private string $firstname;
     private string $email;
+    private string $password;
     private string $created_date;
     private string $role;
 
@@ -115,6 +118,26 @@ class User
     }
 
     /**
+     * Get the value of password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
      * Get the value of created_date
      */
     public function getCreated_date()
@@ -152,5 +175,41 @@ class User
         $this->role = $role;
 
         return $this;
+    }
+}
+
+class UserRepository
+{
+    public DatabaseConnection $connection;
+
+    // public function getUser(): User
+    // {
+    //     $statement = $this->connection->getConnection()->prepare(
+    //         "SELECT id, username, last_name, first_name, email, password, DATE_FORMAT(created_date, '%d/%m/%Y à %Hh%imin%ss') AS french_created_date, role FROM users WHERE id = ?"
+    //     );
+    //     $statement->execute();
+
+    //     $row = $statement->fetch();
+    //     $user = new User();
+    //     $user->setId($row['id']);
+    //     $user->setUsername($row['username']);
+    //     $user->setLastname($row['last_name']);
+    //     $user->setFirstname($row['first_name']);
+    //     $user->setEmail($row['email']);
+    //     $user->setPassword($row['password']);
+    //     $user->setCreated_date($row['french_created_date']);
+    //     $user->setRole($row['role']);
+
+    //     return $user;
+    // }
+
+    public function createUser(string $username, string $lastname, string $firstname, string $email, string $password)
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "INSERT INTO users (username, last_name, first_name, email, password, created_date) VALUES(?, ?, ?, ?, ?, NOW())"
+        );
+        $affectedLines = $statement->execute([$username, $lastname, $firstname, $email, $password]);
+
+        return ($affectedLines > 0);
     }
 }

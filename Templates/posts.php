@@ -30,7 +30,7 @@
             ?>
                 <!-- Post preview-->
                 <div class="post-preview">
-                    <a href="index.php?page=post&action=post&id=<?= urlencode($post->getId()) ?>">
+                    <a href="index.php?page=post&action=seeOnePost&id=<?= urlencode($post->getId()) ?>">
                         <h2 class="post-title"><?= htmlspecialchars($post->getTitle()); ?></h2>
                         <h3 class="post-subtitle"><?= nl2br(htmlspecialchars($post->getWording())); ?></h3>
                     </a>

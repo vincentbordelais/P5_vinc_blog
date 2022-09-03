@@ -27,7 +27,7 @@ class AddCommentController
         if (!$success) {
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         } else {
-            header('Location: index.php?page=post&action=post&id=' . $post_id); // Redirection
+            header('Location: index.php?page=post&action=seeOnePost&id=' . $post_id); // Redirection
         }
     }
 }

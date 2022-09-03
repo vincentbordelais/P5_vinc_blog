@@ -1,6 +1,7 @@
 <?php
 // ROUTEUR :
 
+require_once('src/Controllers/add_user.php');
 require_once('src/Controllers/registration.php');
 require_once('src/Controllers/connection.php');
 require_once('src/Controllers/posts.php');
@@ -10,6 +11,7 @@ require_once('src/Controllers/about.php');
 require_once('src/Controllers/post.php');
 require_once('src/Controllers/homepage.php');
 
+use Application\Controllers\AddUser\AddUserController;
 use Application\Controllers\Posts\PostsController;
 use Application\Controllers\AddComment\AddCommentController;
 use Application\Controllers\Post\PostController;
@@ -20,7 +22,7 @@ try {
         (new PostsController())->execute();
     } elseif ($_GET['page'] === "post") {
         if (isset($_GET['action']) && $_GET['action'] !== '') {
-            if ($_GET['action'] === 'post') {
+            if ($_GET['action'] === 'seeOnePost') {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
                     $post_id = $_GET['id'];
                     // page Article
@@ -40,8 +42,16 @@ try {
             }
         }
     } elseif ($_GET['page'] === "registration") {
-        // page Inscription
-        registration();
+        if (isset($_GET['action']) && $_GET['action'] !== '') {
+            if ($_GET['action'] === 'seeRegistration') {
+                // page Inscription
+                registration();
+            } elseif ($_GET['action'] === 'addUser') {
+                (new AddUserController())->execute($_POST);
+            } else {
+                throw new Exception('La page souhaitée n\'existe pas.');
+            }
+        }
     } elseif ($_GET['page'] === "connection") {
         // page Connexion
         connection();
