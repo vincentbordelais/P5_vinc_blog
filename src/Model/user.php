@@ -182,6 +182,35 @@ class UserRepository
 {
     public DatabaseConnection $connection;
 
+    public function createUser(string $username, string $lastname, string $firstname, string $email, string $password)
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "INSERT INTO users (username, last_name, first_name, email, password, created_date) VALUES(?, ?, ?, ?, ?, NOW())"
+        );
+        $affectedLines = $statement->execute([$username, $lastname, $firstname, $email, $password]);
+
+        return ($affectedLines > 0);
+    }
+
+    public function getUsers()
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM users ORDER BY id DESC"
+        );
+
+        $statement->execute();
+        $users = [];
+        while (($row = $statement->fetch())) {
+            $user = new User();
+            $user->setEmail($row['email']);
+            $user->setPassword($row['password']);
+            $user->setRole($row['role']);
+            $users[] = $user;
+        }
+
+        return $users;
+    }
+
     // public function getUser(): User
     // {
     //     $statement = $this->connection->getConnection()->prepare(
@@ -202,14 +231,4 @@ class UserRepository
 
     //     return $user;
     // }
-
-    public function createUser(string $username, string $lastname, string $firstname, string $email, string $password)
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            "INSERT INTO users (username, last_name, first_name, email, password, created_date) VALUES(?, ?, ?, ?, ?, NOW())"
-        );
-        $affectedLines = $statement->execute([$username, $lastname, $firstname, $email, $password]);
-
-        return ($affectedLines > 0);
-    }
 }

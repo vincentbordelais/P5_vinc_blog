@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php $title = "Le blog de Vinc"; ?>
 
 <!-- Page Header-->
@@ -20,10 +21,10 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
-            <form action="index.php? page=connection" method="POST">
+            <form action="index.php? page=connection&action=login" method="POST">
                 <div class="form-group">
-                    <label for="username">Pseudonyme</label>
-                    <input type="text" class="form-control" id="username" name="username">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>

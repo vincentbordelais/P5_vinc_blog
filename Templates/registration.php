@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php $title = "Le blog de Vinc"; ?>
 
 <!-- Page Header-->

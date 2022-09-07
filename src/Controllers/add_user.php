@@ -34,7 +34,7 @@ class AddUserController
         if (!$success) {
             throw new \Exception('Impossible d\'ajouter l\'utilisateur !');
         } else {
-            header('Location: index.php?page=connection'); // Redirection
+            header('Location: index.php?page=connection&action=seeConnection'); // Redirection
         }
     }
 }

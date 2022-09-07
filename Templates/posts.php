@@ -32,6 +32,14 @@
                 <div class="post-preview">
                     <a href="index.php?page=post&action=seeOnePost&id=<?= urlencode($post->getId()) ?>">
                         <h2 class="post-title"><?= htmlspecialchars($post->getTitle()); ?></h2>
+
+                        <?php if (isset($_SESSION['ROLE_ADMIN'])) { ?>
+                            <div class="d-flex justify-content-end mb-4">
+                                <a class="btn btn-primary text-uppercase" href="#!">(Modifier)</a>
+                                <a class="btn btn-primary text-uppercase" href="#!">(Suprimer)</a>
+                            </div>
+                        <?php }; ?>
+
                         <h3 class="post-subtitle"><?= nl2br(htmlspecialchars($post->getWording())); ?></h3>
                     </a>
                     <p class="post-meta">

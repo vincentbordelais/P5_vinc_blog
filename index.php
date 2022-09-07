@@ -1,6 +1,7 @@
 <?php
 // ROUTEUR :
 
+require_once('src/Controllers/login.php');
 require_once('src/Controllers/add_user.php');
 require_once('src/Controllers/registration.php');
 require_once('src/Controllers/connection.php');
@@ -11,6 +12,7 @@ require_once('src/Controllers/about.php');
 require_once('src/Controllers/post.php');
 require_once('src/Controllers/homepage.php');
 
+use Application\Controllers\Login\LoginController;
 use Application\Controllers\AddUser\AddUserController;
 use Application\Controllers\Posts\PostsController;
 use Application\Controllers\AddComment\AddCommentController;
@@ -53,11 +55,21 @@ try {
             }
         }
     } elseif ($_GET['page'] === "connection") {
-        // page Connexion
-        connection();
+        if (isset($_GET['action']) && $_GET['action'] !== '') {
+            if ($_GET['action'] === 'seeConnection') {
+                // page Connexion
+                connection();
+            } elseif ($_GET['action'] === 'login') {
+                (new LoginController())->execute($_POST);
+            } else {
+                throw new Exception('La page souhaitée n\'existe pas.');
+            }
+        }
     } elseif ($_GET['page'] === "about") {
         // page A propos
         about();
+    } elseif ($_GET['action'] === "disconnect") {
+        (new LoginController())->disconnect();
     } else {
         // page Accueil
         homepage();
