@@ -10,12 +10,11 @@ use Application\Lib\Database\DatabaseConnection;
 
 class PostsController
 {
-    function execute()
+    function seePosts()
     {
         $postRepository = new PostRepository;
         $postRepository->connection = new DatabaseConnection();
         $posts = $postRepository->getPosts();
-        // $posts = getPosts();
 
         require('Templates/posts.php');
     }

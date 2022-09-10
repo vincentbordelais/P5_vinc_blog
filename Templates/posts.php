@@ -30,8 +30,16 @@
             ?>
                 <!-- Post preview-->
                 <div class="post-preview">
-                    <a href="index.php?page=post&action=post&id=<?= urlencode($post->getId()) ?>">
+                    <a href="index.php?page=post&action=seeOnePost&id=<?= urlencode($post->getId()) ?>">
                         <h2 class="post-title"><?= htmlspecialchars($post->getTitle()); ?></h2>
+
+                        <?php if (isset($_SESSION['ROLE_ADMIN'])) { ?>
+                            <div class="d-flex justify-content-end mb-4">
+                                <a class="btn btn-primary text-uppercase" style="margin-right: 10px" href="index.php?page=adminPost&action=seeUpdateFormPost&id=<?= urlencode($post->getId()) ?>">Modifier</a>
+                                <a class="btn btn-primary text-uppercase" href="index.php?page=adminPost&action=deletePost&id=<?= urlencode($post->getId()) ?>">Suprimer</a>
+                            </div>
+                        <?php }; ?>
+
                         <h3 class="post-subtitle"><?= nl2br(htmlspecialchars($post->getWording())); ?></h3>
                     </a>
                     <p class="post-meta">

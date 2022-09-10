@@ -25,33 +25,28 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
 
             <div>
-                <!-- <h3>
-                    <?= htmlspecialchars($post->getTitle()) ?>
-                    <em>le <?= $post->getCreationDate() ?></em>
-                </h3> -->
-
                 <p>
                     <?= nl2br(htmlspecialchars($post->getContent())) ?>
                 </p>
             </div>
 
             <h2>Commentaires</h2>
-            <!-- Formulaire commentaire pour les utilisateurs connectés -->
-            <form action="index.php?action=addComment&id=<?= $post->getId() ?>" method="post">
-                <div>
-                    <label for="author">Votre pseudonyme</label><br />
-                    <input type="text" id="author" name="author" />
-                </div>
-                <div>
-                    <label for="comment">Commentaire</label><br />
-                    <textarea id="comment" name="comment"></textarea>
-                </div>
-                <div>
-                    <input type="submit" />
-                </div>
-            </form>
 
-            <?php
+            <!-- Formulaire commentaire pour les utilisateurs connectés -->
+            <?php if (isset($_SESSION['LOGGED_USER'])) { ?>
+                <form action="index.php?page=post&action=addComment&id=<?= $post->getId() ?>" method="POST">
+                    <div class="form-group">
+                        <label for="username">Pseudonyme</label>
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Commentaire</label>
+                        <textarea class="form-control" id="comment" name="comment"></textarea>
+                    </div><br />
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            <?php };
+
             foreach ($comments as $comment) {
             ?>
                 <p><strong><?= htmlspecialchars($comment->getUsername()) ?></strong> le <?= $comment->getCreation_date() ?></p>

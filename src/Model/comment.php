@@ -144,8 +144,9 @@ class CommentRepository
 
     public function createComment(string $post_id, string $username, string $comment)
     {
+        // j'ai le username(table users) et j'ai besoin de user_id(table comments)
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO comments(post_id, username, comment, update_date,creation_date) VALUES(?, ?, ?, NOW(), NOW())'
+            'INSERT INTO comments(post_id, user_id, comment, creation_date) VALUES(?, ?, ?, NOW())'
         );
         $affectedLines = $statement->execute([$post_id, $username, $comment]);
 
