@@ -1,6 +1,6 @@
 <?php
 
-function homepage()
+function seeHomepage()
 {
     require('Templates/homepage.php');
 }

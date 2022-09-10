@@ -1,6 +1,6 @@
 <?php
 
-function registration()
+function seeRegistration()
 {
     require('Templates/registration.php');
 }

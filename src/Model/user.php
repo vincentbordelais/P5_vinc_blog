@@ -211,6 +211,18 @@ class UserRepository
         return $users;
     }
 
+    public function getUsernameFromLoggedUser()
+    {
+        if (isset($_SESSION['LOGGED_USER'])) {
+            $email = $_SESSION['LOGGED_USER'];
+            $statement = $this->connection->getConnection()->prepare(
+                "SELECT username FROM users WHERE email = $email"
+            );
+            $statement->execute();
+            return $statement->fetch();
+        }
+    }
+
     // public function getUser(): User
     // {
     //     $statement = $this->connection->getConnection()->prepare(

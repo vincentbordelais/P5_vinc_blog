@@ -1,6 +1,6 @@
 <?php
 
-function about()
+function seeAboutPage()
 {
     require('Templates/about.php');
 }

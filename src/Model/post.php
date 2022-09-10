@@ -177,4 +177,34 @@ class PostRepository
 
         return $posts;
     }
+
+    public function removePost(string $post_id)
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "DELETE FROM posts WHERE id = $post_id"
+        );
+        $affectedLines = $statement->execute();
+
+        return ($affectedLines > 0);
+    }
+
+    public function updatePost(string $post_id, string $title, string $wording, string $content)
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'UPDATE posts SET title = ?, wording = ?, content = ?, update_date = NOW() WHERE id = ?'
+        );
+        $affectedLines = $statement->execute([$title, $wording, $content, $post_id]);
+
+        return ($affectedLines > 0);
+    }
+
+    public function addPost(string $title, string $wording, string $content)
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'INSERT INTO posts(title, wording, content, creation_date, update_date) VALUES(?, ?, ?, NOW(), NOW())'
+        );
+        $affectedLines = $statement->execute([$title, $wording, $content]);
+
+        return ($affectedLines > 0);
+    }
 }

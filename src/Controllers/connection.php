@@ -1,6 +1,6 @@
 <?php
 
-function connection()
+function seeConnection()
 {
     require('Templates/connection.php');
 }
