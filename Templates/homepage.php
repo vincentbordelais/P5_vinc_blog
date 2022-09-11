@@ -50,37 +50,23 @@
             <p>Vous souhaitez me contacter ? Remplissez le formulaire ci-dessous pour m'envoyer un message et je vous répondrai dans les plus brefs délais !</p>
             <div class="my-5">
                 <form id="contactForm" action="index.php? page=homepage & action=" method="POST">
-                    <div class="form-floating">
-                        <input class="form-control" id="name" type="text" placeholder="Saisissez votre nom..." data-sb-validations="required" />
+                    <div class="form-group">
                         <label for="name">Nom</label>
-                        <div class="invalid-feedback" data-sb-feedback="name:required">Un nom est requis.</div>
+                        <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    <div class="form-floating">
-                        <input class="form-control" id="email" type="email" placeholder="saisissez votre email..." data-sb-validations="required,email" />
+                    <div class="form-group">
                         <label for="email">Email</label>
-                        <div class="invalid-feedback" data-sb-feedback="email:required">Un email est requis.</div>
-                        <div class="invalid-feedback" data-sb-feedback="email:email">Email non valide.</div>
+                        <input type="text" class="form-control" id="email" name="email" required>
                     </div>
-                    <div class="form-floating">
-                        <input class="form-control" id="phone" type="tel" placeholder="Saisissez votre numéro de téléphone..." data-sb-validations="required" />
-                        <label for="phone">Télephone</label>
-                        <div class="invalid-feedback" data-sb-feedback="phone:required">Un numéro de téléphone est requis.</div>
+                    <div class="form-group">
+                        <label for="tel">Téléphone</label>
+                        <input type="tel" class="form-control" id="tel" name="tel" required>
                     </div>
-                    <div class="form-floating">
-                        <textarea class="form-control" id="message" placeholder="saisissez ici votre message..." style="height: 12rem" data-sb-validations="required"></textarea>
-                        <label for="message">Message</label>
-                        <div class="invalid-feedback" data-sb-feedback="message:required">Un message est requis.</div>
-                    </div>
-                    <br />
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3">
-                            <div class="fw-bolder">Envoi du formulaire réussi!</div>
-                        </div>
-                    </div>
-                    <div class="d-none" id="submitErrorMessage">
-                        <div class="text-center text-danger mb-3">Erreur d'envoi du message!</div>
-                    </div>
-                    <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Envoyer</button>
+                    <div class="form-group">
+                        <label for="comment">Commentaire</label>
+                        <textarea class="form-control" id="comment" name="comment" required></textarea>
+                    </div><br />
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
             </div>
 

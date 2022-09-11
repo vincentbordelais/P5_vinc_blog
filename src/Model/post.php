@@ -143,7 +143,7 @@ class PostRepository
     public function getPost(/*PostRepository $this, */string $id): Post
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, title, wording, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts WHERE id = ?"
+            "SELECT id, title, wording, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date, DATE_FORMAT(update_date, '%d/%m/%Y à %Hh%imin%ss') AS french_update_date FROM posts WHERE id = ?"
         );
         $statement->execute([$id]);
 
@@ -154,6 +154,7 @@ class PostRepository
         $post->setWording($row['wording']);
         $post->setContent($row['content']);
         $post->setCreationDate($row['french_creation_date']);
+        $post->setUpdateDate($row['french_update_date']);
 
         return $post;
     }

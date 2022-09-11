@@ -11,6 +11,11 @@
                     <span class="meta">
                         Posté par Vinc <em>le <?= $post->getCreationDate() ?></em>
                     </span>
+                    <?php if ($post->getUpdateDate() != $post->getCreationDate()) { ?>
+                        <span class="meta">
+                            Mis à jour <em>le <?= $post->getUpdateDate() ?></em>
+                        </span>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -32,7 +37,7 @@
 
             <h2>Commentaires</h2>
 
-            <!-- Formulaire commentaire pour les utilisateurs connectés -->
+            <!-- Pour les utilisateurs connectés: Formulaire commentaire -->
             <?php if (isset($_SESSION['LOGGED_USER'])) { ?>
                 <form action="index.php?page=post&action=addComment&id=<?= $post->getId() ?>" method="POST">
                     <div class="form-group">
@@ -45,15 +50,34 @@
                     </div><br />
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
-            <?php };
+                <?php };
 
-            foreach ($comments as $comment) {
-            ?>
-                <p><strong><?= htmlspecialchars($comment->getUsername()) ?></strong> le <?= $comment->getCreation_date() ?></p>
-                <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+            // Pour l'admin: Liste commentaires avec bouton de validation si validation = No
+            if (isset($_SESSION['ROLE_ADMIN'])) {
+                foreach ($comments as $comment) {
+                    if ($comment->getValidation() === "No") { ?>
+                        <p><strong><?= htmlspecialchars($comment->getUsername()) ?></strong> le <?= $comment->getCreation_date() ?></p>
+                        <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+                        <a class="btn btn-primary text-uppercase" href="index.php?page=post&action=validateComment&comment_id=<?= urlencode($comment->getId()) ?>&post_id=<?= urlencode($post->getId()) ?> ">Valider ce commentaire</a>
+
+                    <?php } else { ?>
+                        <p><strong><?= htmlspecialchars($comment->getUsername()) ?></strong> le <?= $comment->getCreation_date() ?></p>
+                        <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
+                    <?php }
+                }
+            } else {
+
+                // Pour tous: Liste commentaires
+                foreach ($comments as $comment) {
+                    if ($comment->getValidation() === "Yes") {
+                    ?>
+                        <p><strong><?= htmlspecialchars($comment->getUsername()) ?></strong> le <?= $comment->getCreation_date() ?></p>
+                        <p><?= nl2br(htmlspecialchars($comment->getComment())) ?></p>
             <?php
-            }
-            ?>
+                    }
+                }
+            } ?>
+
         </div>
     </div>
 </div>

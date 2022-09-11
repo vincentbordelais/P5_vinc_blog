@@ -1,6 +1,7 @@
 <?php
 // ROUTEUR :
 
+require_once('src/Controllers/admin_comment.php');
 require_once('src/Controllers/admin_post.php');
 require_once('src/Controllers/login.php');
 require_once('src/Controllers/add_user.php');
@@ -12,6 +13,7 @@ require_once('src/Controllers/about.php');
 require_once('src/Controllers/post.php');
 require_once('src/Controllers/homepage.php');
 
+use Application\Controllers\AdminComment\AdminCommentController;
 use Application\Controllers\AdminPost\AdminPostController;
 use Application\Controllers\Login\LoginController;
 use Application\Controllers\AddUser\AddUserController;
@@ -39,6 +41,14 @@ try {
                     (new AddCommentController())->execute($post_id, $_POST);
                 } else {
                     throw new Exception('Aucun identifiant de post envoyé');
+                }
+            } elseif ($_GET['action'] === 'validateComment') {
+                if (isset($_GET['comment_id']) && $_GET['comment_id'] > 0 && isset($_GET['post_id']) && $_GET['post_id'] > 0) {
+                    $comment_id = $_GET['comment_id'];
+                    $post_id = $_GET['post_id'];
+                    (new AdminCommentController())->validate($comment_id, $post_id);
+                } else {
+                    throw new Exception('Aucun identifiant de commentaire envoyé ou aucun identifiant de post envoyé');
                 }
             }
         }

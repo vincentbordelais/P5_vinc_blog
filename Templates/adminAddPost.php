@@ -26,15 +26,15 @@
                 <form action="index.php?page=adminPost&action=addPost" method="POST">
                     <div class="form-group">
                         <label for="title">Titre</label>
-                        <input type="text" class="form-control" id="title" name="title">
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="form-group">
                         <label for="wording">Chapo</label>
-                        <input type="text" class="form-control" id="wording" name="wording">
+                        <input type="text" class="form-control" id="wording" name="wording" required>
                     </div>
                     <div class="form-group">
                         <label for="content">Contenu de l'article</label>
-                        <textarea class="form-control" id="content" name="content"></textarea>
+                        <textarea class="form-control" id="content" name="content" required></textarea>
                     </div><br />
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>

@@ -67,7 +67,6 @@ class AdminPostController
         } else {
             header('Location: index.php?page=post&action=seeOnePost&id=' . $post_id); // Redirection
         }
-        // require('Templates/adminUpdatePost.php');
     }
 
     public function remove(string $post_id)

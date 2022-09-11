@@ -6,13 +6,35 @@ require_once('src/Lib/database.php');
 
 use Application\Lib\Database\DatabaseConnection;
 
-class Comment extends CommentRepository
+class Comment
 {
+    private string $id;
     private string $post_id;
     private string $user_id;
     private string $comment;
     private string $creation_date;
     private string $username;
+    private string $validation;
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get the value of post_id
@@ -113,6 +135,26 @@ class Comment extends CommentRepository
 
         return $this;
     }
+
+    /**
+     * Get the value of validation
+     */
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * Set the value of validation
+     *
+     * @return  self
+     */
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
 }
 
 class CommentRepository
@@ -123,7 +165,7 @@ class CommentRepository
     {
 
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT users.username, user_id, comment, DATE_FORMAT(comments.creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM users INNER JOIN comments ON users.id = comments.user_id WHERE post_id = ? ORDER BY creation_date DESC"
+            "SELECT users.username, comments.id, comments.user_id, comments.comment, DATE_FORMAT(comments.creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date, comments.validation FROM users INNER JOIN comments ON users.id = comments.user_id WHERE post_id = ? ORDER BY creation_date DESC"
         );
 
         $statement->execute([$post_id]);
@@ -131,10 +173,12 @@ class CommentRepository
         $comments = [];
         while (($row = $statement->fetch())) {
             $comment = new Comment();
+            $comment->setId($row['id']);
             $comment->setUsername($row['username']);
             $comment->setUser_id($row['user_id']);
             $comment->setComment($row['comment']);
             $comment->setCreation_date($row['french_creation_date']);
+            $comment->setValidation($row['validation']);
 
             $comments[] = $comment;
         }
@@ -149,6 +193,17 @@ class CommentRepository
             'INSERT INTO comments(post_id, user_id, comment, creation_date) VALUES(?, ?, ?, NOW())'
         );
         $affectedLines = $statement->execute([$post_id, $username, $comment]);
+
+        return ($affectedLines > 0);
+    }
+
+    public function validateComment(string $comment_id)
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'UPDATE comments SET validation = ? WHERE id = ?'
+        );
+        // validation reste en bleu, pourquoi?
+        $affectedLines = $statement->execute(["Yes", $comment_id]);
 
         return ($affectedLines > 0);
     }

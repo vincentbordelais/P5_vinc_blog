@@ -26,15 +26,15 @@
                 <form action="index.php?page=adminPost&action=updatePost&id=<?= $post->getId() ?>" method="POST">
                     <div class="form-group">
                         <label for="title">Titre</label>
-                        <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($post->getTitle()) ?>">
+                        <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($post->getTitle()) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="wording">Chapo</label>
-                        <input type="text" class="form-control" id="wording" name="wording" value="<?= htmlspecialchars($post->getWording()) ?>">
+                        <input type="text" class="form-control" id="wording" name="wording" value="<?= htmlspecialchars($post->getWording()) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="content">Contenu de l'article</label>
-                        <textarea class="form-control" id="content" name="content"> <?= nl2br(htmlspecialchars($post->getContent())) ?></textarea>
+                        <textarea class="form-control" id="content" name="content" required> <?= nl2br(htmlspecialchars($post->getContent())) ?></textarea>
                     </div><br />
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>

@@ -31,6 +31,7 @@
                 <!-- Post preview-->
                 <div class="post-preview">
                     <a href="index.php?page=post&action=seeOnePost&id=<?= urlencode($post->getId()) ?>">
+                        <!-- htmlspecialchars() ou strip_tags() ignore le code HTML pour bloquer notamment l'exécution de code JavaScript -->
                         <h2 class="post-title"><?= htmlspecialchars($post->getTitle()); ?></h2>
 
                         <?php if (isset($_SESSION['ROLE_ADMIN'])) { ?>
