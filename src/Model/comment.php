@@ -186,13 +186,12 @@ class CommentRepository
         return $comments;
     }
 
-    public function createComment(string $post_id, string $username, string $comment)
+    public function createComment(string $post_id, string $user_id, string $comment)
     {
-        // j'ai le username(table users) et j'ai besoin de user_id(table comments)
         $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO comments(post_id, user_id, comment, creation_date) VALUES(?, ?, ?, NOW())'
         );
-        $affectedLines = $statement->execute([$post_id, $username, $comment]);
+        $affectedLines = $statement->execute([$post_id, $user_id, $comment]);
 
         return ($affectedLines > 0);
     }

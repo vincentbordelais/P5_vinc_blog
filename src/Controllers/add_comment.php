@@ -12,10 +12,9 @@ class AddCommentController
 {
     public function execute(string $post_id, array $input)
     {
-        $username = null;
+        $user_id = $_SESSION['LOGGED_USERID'];
         $comment = null;
-        if (!empty($input['username']) && !empty($input['comment'])) {
-            $username = $input['username'];
+        if (isset($user_id) && !empty($input['comment'])) {
             $comment = $input['comment'];
         } else {
             throw new \Exception('Les données du formulaire sont invalides.');
@@ -23,7 +22,7 @@ class AddCommentController
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
-        $success = $commentRepository->createComment($post_id, $username, $comment);
+        $success = $commentRepository->createComment($post_id, $user_id, $comment);
         if (!$success) {
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         } else {

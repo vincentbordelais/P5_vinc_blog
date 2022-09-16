@@ -38,15 +38,15 @@
             <h2>Commentaires</h2>
 
             <!-- Pour les utilisateurs connectés: Formulaire commentaire -->
-            <?php if (isset($_SESSION['LOGGED_USER'])) { ?>
+            <?php if (isset($_SESSION['LOGGED_USERNAME'])) { ?>
                 <form action="index.php?page=post&action=addComment&id=<?= $post->getId() ?>" method="POST">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="username">Pseudonyme</label>
                         <input type="text" class="form-control" id="username" name="username">
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="comment">Commentaire</label>
-                        <textarea class="form-control" id="comment" name="comment"></textarea>
+                        <textarea class="form-control" id="comment" name="comment" required></textarea>
                     </div><br />
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>

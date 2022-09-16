@@ -30,7 +30,8 @@ class LoginController
                     $_SESSION['errorMessage'] = "Mot de passe incorrect";
                     header('Location: index.php?page=connection&action=seeConnection');
                 } else {
-                    $_SESSION['LOGGED_USER'] = $user->getUsername();
+                    $_SESSION['LOGGED_USERNAME'] = $user->getUsername();
+                    $_SESSION['LOGGED_USERID'] = $user->getId();
                     if ($user->getRole() === "Admin") {
                         $_SESSION['ROLE_ADMIN'] = "Admin";
                     }

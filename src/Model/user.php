@@ -192,10 +192,10 @@ class UserRepository
         return ($affectedLines > 0);
     }
 
-    public function getUserByEmail($email): User
+    public function getUserByEmail(string $email): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, username, last_name, first_name, email, password, DATE_FORMAT(created_date, '%d/%m/%Y à %Hh%imin%ss') AS french_created_date, role FROM users WHERE email = ?"
+            "SELECT id, username, password, role FROM users WHERE email = ?"
         );
         $statement->execute([$email]);
 
@@ -203,11 +203,7 @@ class UserRepository
         $user = new User();
         $user->setId($row['id']);
         $user->setUsername($row['username']);
-        $user->setLastname($row['last_name']);
-        $user->setFirstname($row['first_name']);
-        $user->setEmail($row['email']);
         $user->setPassword($row['password']);
-        $user->setCreated_date($row['french_created_date']);
         $user->setRole($row['role']);
         return $user;
     }
