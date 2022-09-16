@@ -192,55 +192,32 @@ class UserRepository
         return ($affectedLines > 0);
     }
 
-    public function getUsers()
+    public function getUserByEmail($email): User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT * FROM users ORDER BY id DESC"
+            "SELECT id, username, last_name, first_name, email, password, DATE_FORMAT(created_date, '%d/%m/%Y à %Hh%imin%ss') AS french_created_date, role FROM users WHERE email = ?"
         );
+        $statement->execute([$email]);
 
-        $statement->execute();
-        $users = [];
-        while (($row = $statement->fetch())) {
-            $user = new User();
-            $user->setEmail($row['email']);
-            $user->setPassword($row['password']);
-            $user->setRole($row['role']);
-            $users[] = $user;
-        }
-
-        return $users;
+        $row = $statement->fetch();
+        $user = new User();
+        $user->setId($row['id']);
+        $user->setUsername($row['username']);
+        $user->setLastname($row['last_name']);
+        $user->setFirstname($row['first_name']);
+        $user->setEmail($row['email']);
+        $user->setPassword($row['password']);
+        $user->setCreated_date($row['french_created_date']);
+        $user->setRole($row['role']);
+        return $user;
     }
 
-    public function getUsernameFromLoggedUser()
+    public function verifyEmail(string $email)
     {
-        if (isset($_SESSION['LOGGED_USER'])) {
-            $email = $_SESSION['LOGGED_USER'];
-            $statement = $this->connection->getConnection()->prepare(
-                "SELECT username FROM users WHERE email = $email"
-            );
-            $statement->execute();
-            return $statement->fetch();
-        }
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM users WHERE email = ?"
+        );
+        $statement->execute([$email]);
+        return $statement->fetch();
     }
-
-    // public function getUser(): User
-    // {
-    //     $statement = $this->connection->getConnection()->prepare(
-    //         "SELECT id, username, last_name, first_name, email, password, DATE_FORMAT(created_date, '%d/%m/%Y à %Hh%imin%ss') AS french_created_date, role FROM users WHERE id = ?"
-    //     );
-    //     $statement->execute();
-
-    //     $row = $statement->fetch();
-    //     $user = new User();
-    //     $user->setId($row['id']);
-    //     $user->setUsername($row['username']);
-    //     $user->setLastname($row['last_name']);
-    //     $user->setFirstname($row['first_name']);
-    //     $user->setEmail($row['email']);
-    //     $user->setPassword($row['password']);
-    //     $user->setCreated_date($row['french_created_date']);
-    //     $user->setRole($row['role']);
-
-    //     return $user;
-    // }
 }

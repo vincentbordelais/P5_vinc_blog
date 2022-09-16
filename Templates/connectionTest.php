@@ -21,24 +21,26 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
-            <?php if (isset($_SESSION['errorMessage'])) { ?>
-                <div class="alert alert-danger ?>" role="alert">
-                    <span><?php echo $_SESSION['errorMessage']; ?></span>
-                </div>
-            <?php }
-            unset($_SESSION['errorMessage']);
-            ?>
-
             <form action="index.php? page=connection&action=login" method="POST">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
+                <?php
+                if (isset($_SESSION['errorEmailMessage'])) {
+                    echo "<span style='color:red;'>Email incorrect</span>";
+                }
+                ?>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
                     <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <br><button type="submit" class="btn btn-primary">Envoyer</button>
+                </div><br />
+                <?php
+                if (isset($_SESSION['errorPasswordMessage'])) {
+                    echo "<span style='color:red;'>Mot de passe incorrect</span>";
+                }
+                ?>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
 
 

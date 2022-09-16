@@ -14,29 +14,30 @@ class LoginController
 {
     public function execute(array $input)
     {
-        if (isset($input['email']) && isset($input['password'])) {
-            $userRepository = new UserRepository();
-            $userRepository->connection = new DatabaseConnection();
-            $users = $userRepository->getUsers();
+        $email = $input['email'];
+        $password = hash('sha256', $input['password']);
 
-            foreach ($users as $user) {
-                if ($user->getEmail() === $input['email'] && $user->getPassword() === hash('sha256', $input['password'])) {
-                    $_SESSION['LOGGED_USER'] = $user->getEmail();
+        $userRepository = new UserRepository();
+        $userRepository->connection = new DatabaseConnection();
+
+        if ($userRepository->verifyEmail($email) === false) {
+            $_SESSION['errorMessage'] = "Cet email n'a pas encore de compte";
+            header('Location: index.php?page=connection&action=seeConnection');
+        } else {
+            if (isset($email) && isset($password)) {
+                $user = $userRepository->getUserByEmail($email);
+                if ($password != $user->getPassword()) {
+                    $_SESSION['errorMessage'] = "Mot de passe incorrect";
+                    header('Location: index.php?page=connection&action=seeConnection');
+                } else {
+                    $_SESSION['LOGGED_USER'] = $user->getUsername();
                     if ($user->getRole() === "Admin") {
                         $_SESSION['ROLE_ADMIN'] = "Admin";
                     }
-                } else {
-                    //  throw new \Exception('Email de l\'utilisateur non trouvé.');
+                    header('Location: index.php?page=posts');
                 }
             }
-        } else {
-            throw new \Exception('Les données du formulaire sont invalides.');
         }
-        // $userRepository = new UserRepository();
-        // $userRepository->connection = new DatabaseConnection();
-        // $username = $userRepository->getUsernameFromLoggedUser();
-        // $_SESSION['USERNAME_LOGGED_USER'] = $username();
-        header('Location: index.php?page=posts');
     }
 
     // Uniquement pour les tests de présentation:
