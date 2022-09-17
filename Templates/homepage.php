@@ -7,7 +7,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>Le blog de Vinc !</h1>
-                    <span class="subheading">Les derniers billets : </span>
+                    <span class="subheading">Pour me contacter : </span>
                 </div>
             </div>
         </div>
@@ -49,22 +49,22 @@
 
             <p>Vous souhaitez me contacter ? Remplissez le formulaire ci-dessous pour m'envoyer un message et je vous répondrai dans les plus brefs délais !</p>
             <div class="my-5">
-                <form id="contactForm" action="index.php? page=homepage & action=" method="POST">
+                <form id="contactForm" action="index.php? page=addMessage" method="POST">
                     <div class="form-group">
-                        <label for="name">Nom</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="firstname">Nom</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Prénom</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="tel">Téléphone</label>
-                        <input type="tel" class="form-control" id="tel" name="tel" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="comment">Commentaire</label>
-                        <textarea class="form-control" id="comment" name="comment" required></textarea>
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" name="message" required></textarea>
                     </div><br />
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>

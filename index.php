@@ -1,6 +1,8 @@
 <?php
 // ROUTEUR :
 
+require_once('src/Controllers/messages.php');
+require_once('src/Controllers/add_message.php');
 require_once('src/Controllers/admin_comment.php');
 require_once('src/Controllers/admin_post.php');
 require_once('src/Controllers/login.php');
@@ -13,6 +15,8 @@ require_once('src/Controllers/about.php');
 require_once('src/Controllers/post.php');
 require_once('src/Controllers/homepage.php');
 
+use Application\Controllers\Messages\MessagesController;
+use Application\Controllers\AddMessage\AddMessageController;
 use Application\Controllers\AdminComment\AdminCommentController;
 use Application\Controllers\AdminPost\AdminPostController;
 use Application\Controllers\Login\LoginController;
@@ -112,6 +116,11 @@ try {
         } else {
             throw new Exception('La page souhaitée n\'existe pas.');
         }
+    } elseif ($_GET['page'] === "addMessage") {
+        (new AddMessageController())->execute($_POST);
+    } elseif ($_GET['page'] === "seeMessages") {
+        // page Lire messages
+        (new MessagesController())->seeMessages();
     } else {
         // page Accueil
         seeHomepage();

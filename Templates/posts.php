@@ -17,8 +17,6 @@
 
 
 <?php ob_start(); ?>
-<!-- <h1>Le super blog de Vinc !</h1>
-<p>Derniers billets du blog :</p> -->
 
 
 <div class="container px-4 px-lg-5">
@@ -52,10 +50,6 @@
             <?php
             }
             ?>
-
-            <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Billets plus anciens →</a></div>
-
 
 
         </div>
