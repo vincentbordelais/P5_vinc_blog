@@ -27,8 +27,7 @@
             <p>Anciennement chef opérateur du son, j’ai débuté ma reconversion en tant que développeur web en suivant une formation continue chez WebForce3 de développeur web puis une année en alternance avec l’IPSSI en devOps.</p>
 
             <!-- CV-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Téléchargez mon CV</a></div>
-
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="cv/CV_Bordelais_Vincent.pdf" target="_blank">Téléchargez mon CV</a></div>
         </div>
     </div>
 </div>

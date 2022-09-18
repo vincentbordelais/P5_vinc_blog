@@ -20,6 +20,7 @@ class AdminPostController
         $title = null;
         $wording = null;
         $content = null;
+
         if (!empty($input['title']) && !empty($input['wording']) && !empty($input['content'])) {
             $title = $input['title'];
             $wording = $input['wording'];
@@ -28,7 +29,7 @@ class AdminPostController
             throw new \Exception('Les données de l\'article sont invalides.');
         }
 
-        $postRepository = new PostRepository;
+        $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
         $success = $postRepository->addPost($title, $wording, $content);
         if (!$success) {
@@ -40,7 +41,7 @@ class AdminPostController
 
     public function seeUpdateForm(string $post_id)
     {
-        $postRepository = new PostRepository;
+        $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
         $post = $postRepository->getPost($post_id);
         require('Templates/adminUpdatePost.php');
@@ -51,6 +52,7 @@ class AdminPostController
         $title = null;
         $wording = null;
         $content = null;
+
         if (!empty($input['title']) && !empty($input['wording']) && !empty($input['content'])) {
             $title = $input['title'];
             $wording = $input['wording'];
@@ -67,12 +69,11 @@ class AdminPostController
         } else {
             header('Location: index.php?page=post&action=seeOnePost&id=' . $post_id); // Redirection
         }
-        // require('Templates/adminUpdatePost.php');
     }
 
     public function remove(string $post_id)
     {
-        $postRepository = new PostRepository;
+        $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
         $postRepository->removePost($post_id);
         header('Location: index.php?page=posts'); // Redirection

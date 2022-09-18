@@ -10,9 +10,9 @@ use Application\Lib\Database\DatabaseConnection;
 
 class PostsController
 {
-    function seePosts()
+    public function seePosts()
     {
-        $postRepository = new PostRepository;
+        $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
         $posts = $postRepository->getPosts();
 

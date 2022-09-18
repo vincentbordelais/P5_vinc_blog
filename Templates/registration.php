@@ -21,26 +21,35 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
+
+            <?php if (isset($_SESSION['errorMessage'])) { ?>
+                <div class="alert alert-danger ?>" role="alert">
+                    <span><?php echo $_SESSION['errorMessage']; ?></span>
+                </div>
+            <?php }
+            unset($_SESSION['errorMessage']);
+            ?>
+
             <form action="index.php?page=registration&action=addUser" method="POST">
                 <div class="form-group">
                     <label for="username">Pseudonyme</label>
-                    <input type="text" class="form-control" id="username" name="username">
+                    <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 <div class="form-group">
                     <label for="firstname">Nom</label>
-                    <input type="text" class="form-control" id="firstname" name="firstname">
+                    <input type="text" class="form-control" id="firstname" name="firstname" required>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Prénom</label>
-                    <input type="text" class="form-control" id="lastname" name="lastname">
+                    <input type="text" class="form-control" id="lastname" name="lastname" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input type="password" class="form-control" id="password" name="password" required>
                 </div><br />
                 <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
