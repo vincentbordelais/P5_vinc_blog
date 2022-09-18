@@ -155,27 +155,25 @@ class PostRepository
         $post->setContent($row['content']);
         $post->setCreationDate($row['french_creation_date']);
         $post->setUpdateDate($row['french_update_date']);
-
         return $post;
     }
 
     public function getPosts(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, title, wording, content, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
+            "SELECT id, title, wording, content, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date, DATE_FORMAT(update_date, '%d/%m/%Y') AS french_update_date FROM posts ORDER BY update_date DESC LIMIT 0, 5"
         );
         $posts = [];
-        while (($row = $statement->fetch())) {
+        while ($row = $statement->fetch()) {
             $post = new Post();
             $post->setId($row['id']);
             $post->setTitle($row['title']);
             $post->setWording($row['wording']);
             $post->setContent($row['content']);
             $post->setCreationDate($row['french_creation_date']);
-
+            $post->setUpdateDate($row['french_update_date']);
             $posts[] = $post;
         }
-
         return $posts;
     }
 
@@ -185,7 +183,6 @@ class PostRepository
             "DELETE FROM posts WHERE id = $post_id"
         );
         $affectedLines = $statement->execute();
-
         return ($affectedLines > 0);
     }
 
@@ -195,7 +192,6 @@ class PostRepository
             'UPDATE posts SET title = ?, wording = ?, content = ?, update_date = NOW() WHERE id = ?'
         );
         $affectedLines = $statement->execute([$title, $wording, $content, $post_id]);
-
         return ($affectedLines > 0);
     }
 
@@ -205,7 +201,6 @@ class PostRepository
             'INSERT INTO posts(title, wording, content, creation_date, update_date) VALUES(?, ?, ?, NOW(), NOW())'
         );
         $affectedLines = $statement->execute([$title, $wording, $content]);
-
         return ($affectedLines > 0);
     }
 }

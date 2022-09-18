@@ -14,7 +14,7 @@ class PostController
 {
     public function seeOnePost(string $post_id)
     {
-        $postRepository = new PostRepository;
+        $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
         $post = $postRepository->getPost($post_id);
 

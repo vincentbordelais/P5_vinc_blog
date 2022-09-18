@@ -163,11 +163,9 @@ class CommentRepository
 
     public function getComments(string $post_id): array
     {
-
         $statement = $this->connection->getConnection()->prepare(
             "SELECT users.username, comments.id, comments.user_id, comments.comment, DATE_FORMAT(comments.creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date, comments.validation FROM users INNER JOIN comments ON users.id = comments.user_id WHERE post_id = ? ORDER BY creation_date DESC"
         );
-
         $statement->execute([$post_id]);
 
         $comments = [];
@@ -179,10 +177,8 @@ class CommentRepository
             $comment->setComment($row['comment']);
             $comment->setCreation_date($row['french_creation_date']);
             $comment->setValidation($row['validation']);
-
             $comments[] = $comment;
         }
-
         return $comments;
     }
 
@@ -192,7 +188,6 @@ class CommentRepository
             'INSERT INTO comments(post_id, user_id, comment, creation_date) VALUES(?, ?, ?, NOW())'
         );
         $affectedLines = $statement->execute([$post_id, $user_id, $comment]);
-
         return ($affectedLines > 0);
     }
 
@@ -201,9 +196,7 @@ class CommentRepository
         $statement = $this->connection->getConnection()->prepare(
             'UPDATE comments SET validation = ? WHERE id = ?'
         );
-        // validation reste en bleu, pourquoi?
         $affectedLines = $statement->execute(["Yes", $comment_id]);
-
         return ($affectedLines > 0);
     }
 }

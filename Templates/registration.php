@@ -21,6 +21,15 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
+
+            <?php if (isset($_SESSION['errorMessage'])) { ?>
+                <div class="alert alert-danger ?>" role="alert">
+                    <span><?php echo $_SESSION['errorMessage']; ?></span>
+                </div>
+            <?php }
+            unset($_SESSION['errorMessage']);
+            ?>
+
             <form action="index.php?page=registration&action=addUser" method="POST">
                 <div class="form-group">
                     <label for="username">Pseudonyme</label>

@@ -17,6 +17,7 @@ class AddUserController
         $firstname = null;
         $email = null;
         $password = null;
+
         if (!empty($input['username']) && !empty($input['lastname']) && !empty($input['firstname']) && !empty($input['email']) && !empty($input['password'])) {
             $username = $input['username'];
             $lastname = $input['lastname'];
@@ -30,11 +31,20 @@ class AddUserController
 
         $userRepository = new UserRepository();
         $userRepository->connection = new DatabaseConnection();
-        $success = $userRepository->createUser($username, $lastname, $firstname, $email, $password);
-        if (!$success) {
-            throw new \Exception('Impossible d\'ajouter l\'utilisateur !');
+
+        if ($userRepository->verifyUsername($username) != false) {
+            $_SESSION['errorMessage'] = "Ce pseudonyme existe déjà.";
+            header('Location: index.php?page=registration&action=seeRegistration');
+        } elseif ($userRepository->verifyEmail($email) != false) {
+            $_SESSION['errorMessage'] = "Cet email a déjà un compte";
+            header('Location: index.php?page=registration&action=seeRegistration');
         } else {
-            header('Location: index.php?page=connection&action=seeConnection'); // Redirection
+            $success = $userRepository->createUser($username, $lastname, $firstname, $email, $password);
+            if (!$success) {
+                throw new \Exception('Impossible d\'ajouter l\'utilisateur !');
+            } else {
+                header('Location: index.php?page=connection&action=seeConnection');
+            }
         }
     }
 }

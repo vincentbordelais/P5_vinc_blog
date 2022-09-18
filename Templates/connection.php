@@ -21,6 +21,7 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
+            <!-- Seul un utilisateur inscrit peut se connecter -->
             <?php if (isset($_SESSION['errorMessage'])) { ?>
                 <div class="alert alert-danger ?>" role="alert">
                     <span><?php echo $_SESSION['errorMessage']; ?></span>

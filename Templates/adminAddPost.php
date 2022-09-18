@@ -7,7 +7,6 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
                     <h1>Rédiger un article</h1>
-                    <!-- <span class="subheading">Développeur PHP / Symfony</span> -->
                 </div>
             </div>
         </div>
@@ -21,7 +20,7 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
-            <!-- Formulaire création article pour l'admin connecté -->
+            <!-- Seul l'admin connecté peut rédiger un article -->
             <?php if (isset($_SESSION['ROLE_ADMIN'])) { ?>
                 <form action="index.php?page=adminPost&action=addPost" method="POST">
                     <div class="form-group">
@@ -29,7 +28,7 @@
                         <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="form-group">
-                        <label for="wording">Chapo</label>
+                        <label for="wording">Sous-titre</label>
                         <input type="text" class="form-control" id="wording" name="wording" required>
                     </div>
                     <div class="form-group">

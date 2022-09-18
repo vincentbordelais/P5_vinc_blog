@@ -21,7 +21,7 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
-            <!-- Formulaire création article pour l'admin connecté -->
+            <!-- Seul l'admin peut mettre à jour un article -->
             <?php if (isset($_SESSION['ROLE_ADMIN'])) { ?>
                 <form action="index.php?page=adminPost&action=updatePost&id=<?= $post->getId() ?>" method="POST">
                     <div class="form-group">

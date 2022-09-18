@@ -163,7 +163,6 @@ class MessageRepository
             $message->setEmail($row['email']);
             $message->setMessage($row['message']);
             $message->setCreated_date($row['french_created_date']);
-
             $messages[] = $message;
         }
         return $messages;

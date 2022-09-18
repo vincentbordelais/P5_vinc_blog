@@ -188,7 +188,6 @@ class UserRepository
             "INSERT INTO users (username, last_name, first_name, email, password, created_date) VALUES(?, ?, ?, ?, ?, NOW())"
         );
         $affectedLines = $statement->execute([$username, $lastname, $firstname, $email, $password]);
-
         return ($affectedLines > 0);
     }
 
@@ -214,6 +213,15 @@ class UserRepository
             "SELECT * FROM users WHERE email = ?"
         );
         $statement->execute([$email]);
+        return $statement->fetch();
+    }
+
+    public function verifyUsername(string $username)
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM users WHERE username = ?"
+        );
+        $statement->execute([$username]);
         return $statement->fetch();
     }
 }

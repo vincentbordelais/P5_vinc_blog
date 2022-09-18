@@ -29,6 +29,8 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
+
+            <!-- Tout le monde peut lire un article -->
             <div>
                 <p>
                     <?= nl2br(htmlspecialchars($post->getContent())) ?>
@@ -37,13 +39,9 @@
 
             <h2>Commentaires</h2>
 
-            <!-- Pour les utilisateurs connectés: Formulaire commentaire -->
+            <!-- Seuls les utilisateurs connectés peuvent écrire un commentaire -->
             <?php if (isset($_SESSION['LOGGED_USERNAME'])) { ?>
                 <form action="index.php?page=post&action=addComment&id=<?= $post->getId() ?>" method="POST">
-                    <!-- <div class="form-group">
-                        <label for="username">Pseudonyme</label>
-                        <input type="text" class="form-control" id="username" name="username">
-                    </div> -->
                     <div class="form-group">
                         <label for="comment">Commentaire</label>
                         <textarea class="form-control" id="comment" name="comment" required></textarea>
@@ -52,7 +50,7 @@
                 </form>
                 <?php };
 
-            // Pour l'admin: Liste commentaires avec bouton de validation si validation = No
+            // Seul l'admin peut valider un commentaire
             if (isset($_SESSION['ROLE_ADMIN'])) {
                 foreach ($comments as $comment) {
                     if ($comment->getValidation() === "No") { ?>
@@ -67,7 +65,7 @@
                 }
             } else {
 
-                // Pour tous: Liste commentaires
+                // Tout le monde peut lire les commentaires
                 foreach ($comments as $comment) {
                     if ($comment->getValidation() === "Yes") {
                     ?>
@@ -77,6 +75,7 @@
                     }
                 }
             } ?>
+
 
         </div>
     </div>

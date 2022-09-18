@@ -15,38 +15,14 @@
 </header>
 
 
-
 <?php ob_start(); ?>
-<!-- <h1>Le super blog de Vinc !</h1>
-<p>Derniers billets du blog :</p> -->
 
 
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
 
-            <?php
-            // foreach ($posts as $post) {
-            ?>
-            <!-- Post preview-->
-            <!-- <div class="post-preview">
-                <a href="index.php?action=post&id=<?= urlencode($post->id) ?>">
-                    <h2 class="post-title"><?= htmlspecialchars($post->title); ?></h2>
-                    <h3 class="post-subtitle"><?= nl2br(htmlspecialchars($post->content)); ?></h3>
-                </a>
-                <p class="post-meta">
-                    Posté par Vinc le <?= $post->frenchCreationDate; ?>
-                </p>
-            </div>
-            <!-- Divider-->
-            <!-- <hr class="my-4" />
-        <?php
-        // }
-        ?>
-
-        <!-- Pager-->
-            <!-- <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Billets plus anciens →</a></div> -->
-
+            <!-- Tout le monde peut écrire un message à l'admin -->
             <p>Vous souhaitez me contacter ? Remplissez le formulaire ci-dessous pour m'envoyer un message et je vous répondrai dans les plus brefs délais !</p>
             <div class="my-5">
                 <form id="contactForm" action="index.php? page=addMessage" method="POST">
@@ -69,6 +45,7 @@
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
             </div>
+
 
         </div>
     </div>
