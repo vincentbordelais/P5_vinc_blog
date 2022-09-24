@@ -41,7 +41,7 @@
                 <?php }; ?>
                 <?php if (isset($_SESSION['LOGGED_USERNAME'])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php?page=connection&action=disconnect">Déconexion</a>
+                        <a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php?page=connection&action=disconnect">Déconnexion</a>
                     </li>
                 <?php } ?>
             </ul>
