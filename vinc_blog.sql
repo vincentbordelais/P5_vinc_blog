@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : lun. 19 sep. 2022 à 15:47
+-- Généré le : mer. 21 sep. 2022 à 19:17
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -47,7 +47,8 @@ INSERT INTO `comments` (`id`, `post_id`, `user_id`, `comment`, `creation_date`, 
 (17, 2, 9, 'Pour l\'instant on est entre nous, non?', '2022-08-28 12:11:08', 'No'),
 (37, 11, 9, '€``ù%/.;?@#©', '2022-09-10 13:04:29', 'No'),
 (39, 1, 10, 'De rien les cocos', '2022-09-11 17:37:59', 'Yes'),
-(40, 6, 9, 'Ben alors, allez, au boulot!', '2022-09-16 16:16:25', 'Yes');
+(40, 6, 9, 'Ben alors, allez, au boulot!', '2022-09-16 16:16:25', 'Yes'),
+(41, 2, 7, '<script> alert(\'test\'); </script>', '2022-09-21 16:31:50', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -93,8 +94,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `title`, `wording`, `content`, `creation_date`, `update_date`) VALUES
-(1, 'Bienvenue sur le blog de Vinc !', 'Ce n\'est qu\'une première version.', 'Je vous souhaite à toutes et à tous la bienvenue sur mon blog qui parlera de ce dont vous avez envie !', '2022-02-17 16:28:41', '2022-02-17 16:28:41'),
-(2, 'Vinc à la conquête du monde !', 'No limit !', 'C\'est officiel, ...', '2022-02-17 16:28:42', '2022-02-17 16:28:42'),
+(1, 'Bienvenue sur le blog de Vinc !', 'Ce n\'est qu\'une première version.', 'Je vous souhaite à toutes et à tous la bienvenue sur mon blog qui parlera de ce dont vous avez envie !', '2022-08-17 16:28:41', '2022-08-17 16:28:41'),
+(2, 'Vinc à la conquête du monde !', 'No limit !', 'C\'est officiel, ...', '2022-08-17 16:28:42', '2022-08-17 16:28:42'),
 (6, 'Voilà mon troisième article', 'Ca dépote quand même', 'Pour autant j\'avoue que je manque d\'inspiration pour vous raconter quelque chose d\'intéressant.', '2022-09-09 10:52:52', '2022-09-09 10:52:52'),
 (11, 'test5', 'test5', '   test5', '2022-09-09 18:02:54', '2022-09-16 12:39:12');
 
@@ -162,7 +163,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT pour la table `messages`

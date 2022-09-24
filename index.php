@@ -84,6 +84,10 @@ try {
         // page A propos
         seeAboutPage();
     } elseif ($_GET['page'] === "adminPost") {
+        // Cette condition est inutile puisque même en tapant l'url de la route admin, la page sera vierge :
+        // if (!isset($_SESSION['ROLE_ADMIN'])) {
+        //     header('Location: index.php?page=homepage');
+        // }
         if (isset($_GET['action']) && $_GET['action'] !== '') {
             // page rédaction d'un article
             if ($_GET['action'] === 'seeAddFormPost') {
@@ -119,6 +123,9 @@ try {
     } elseif ($_GET['page'] === "addMessage") {
         (new AddMessageController())->execute($_POST);
     } elseif ($_GET['page'] === "seeMessages") {
+        if (!isset($_SESSION['ROLE_ADMIN'])) {
+            header('Location: index.php?page=homepage');
+        }
         // page Lire messages
         (new MessagesController())->seeMessages();
     } else {

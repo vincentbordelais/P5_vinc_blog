@@ -3,10 +3,10 @@ OC P5 Blog
 
 Installation:
 - Clonez le repository https://github.com/vincentbordelais/P5_vinc_blog.
-- Importez dans votre phpMyAdmin le fichier .sql.
+- Créez une base de donnée sur votre SGBD (phpMyAdmin par ex.) et y importez le fichier vinc_blog.sql.
 - Modifiez le fichier Lib/database.php en renseignant vos informations de connexion.
-- Démarrez le projet en local en pointant sur le dossier P5_vinc_blog.
-- La table users montre le role Admin pour vincent@free.fr, mot de passe: aze.
+- Démarrez le projet en local, dans le dossier web de votre serveur, en pointant sur le dossier P5_vinc_blog.
+- Administration du blog: dans la table users, l'utilisateur vincent@free.fr a le role Admin, som mot de passe est: aze.
 
 
 Utilisation:
